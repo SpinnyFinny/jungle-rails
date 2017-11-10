@@ -5,6 +5,11 @@
   </header>
 
   <div class="panel panel-default items">
+  <% if cart.empty? %>
+    <div class="order-summary jumbotron">
+      <h4>Your cart is empty <%= current_user.email %>!</h4>
+    </div>
+  <% else %>
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -49,5 +54,5 @@
       <% end %>
     </div>
   </div>
-
+<% end %>
 </section>
