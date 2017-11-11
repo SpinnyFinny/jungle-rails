@@ -7,7 +7,8 @@
   <div class="panel panel-default items">
   <% if cart.empty? %>
     <div class="order-summary jumbotron">
-      <h4>Your cart is empty <%= current_user.email %>!</h4>
+      <h4>Your cart is empty!</h4>
+      <a href='/'>back to products<a>
     </div>
   <% else %>
     <table class="table table-bordered">
@@ -48,7 +49,9 @@
           data-name="Jungle"
           data-description="Khurram Virani's Jungle Order"
           data-locale="auto"
+          if current_user
           data-email=<%= current_user.email %>
+          end
           data-currency="cad">
         </script>
       <% end %>
