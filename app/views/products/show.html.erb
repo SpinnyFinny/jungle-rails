@@ -35,6 +35,9 @@
               <%= form.select(:rating, (1..5)) %>
             </div>  
             <%= form.submit 'Post review', class: 'btn btn-primary' %>
+            <% if current_user == @review.user %>
+              <p>delete<p>
+            <% end %>
           <% end %>
         </div>
       </div>
