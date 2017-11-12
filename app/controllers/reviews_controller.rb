@@ -12,7 +12,9 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
-
+    puts params
+    Review.find(params[:id]).destroy
+    redirect_to :back
   end
 end
 

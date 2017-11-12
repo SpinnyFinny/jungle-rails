@@ -35,20 +35,20 @@
               <%= form.select(:rating, (1..5)) %>
             </div>  
             <%= form.submit 'Post review', class: 'btn btn-primary' %>
-            <% if current_user == @review.user %>
-              <p>delete<p>
-            <% end %>
           <% end %>
         </div>
       </div>
 
-      <% @product.reviews.each do |review| %>
+      <% @product.reviews.reverse_each do |review| %>
         <div class="col-sm-8">
           <dl class="dl-horizontal">
             <dt>Review</dt>
             <dd><%= review.description %></dd>
             <dt>Rating</dt>
             <dd><%= review.rating %></dd>
+            <%if current_user && (current_user.id == review.user_id) %>
+              <%= link_to fa_icon('trash'),  product_review_path(@product, review),class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+            <%end%>
           </dl>
         </div>
       <% end %>
