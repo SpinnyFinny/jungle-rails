@@ -46,18 +46,24 @@ RSpec.describe User, type: :model do
   describe '.authenticate_with_credentials' do
     before(:each) do
       @user = User.new(first_name:'Finn', last_name:'LeFinn', email:'finn@finn.finn', password:'finn', password_confirmation:'finn')
-      @user_authentication = @user.authenticate_with_credentials(@user.email, @user.password)
     end
     
     it 'should authenticate user' do
       @user.save
-      expect(@user_authentication).to eq @user
+      expect(@user.authenticate_with_credentials(@user.email, @user.password)
+).to eq @user
     end
 
     it 'should authenticate regardless of email case' do
       @user.save
       @user.email = 'fiNn@FINN.finn'
-      expect(@user_authentication).to eq @user
+      expect(@user.authenticate_with_credentials(@user.email, @user.password)).to eq @user
+    end
+
+    it 'should authenticate regardless of trailing space' do
+      @user.save
+      @user.email = ' fiNn@FINN.finn '
+      expect(@user.authenticate_with_credentials(@user.email, @user.password)).to eq @user
     end
   end
   
